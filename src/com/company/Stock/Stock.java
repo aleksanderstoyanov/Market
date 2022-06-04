@@ -9,10 +9,11 @@ public class Stock {
     String id;
     String name;
     BigDecimal deliveryPrice;
-    Type type;
+    BigDecimal sellPrice;
+    Category category;
     LocalDate expireDate;
 
-    public Stock(String id, String name, BigDecimal deliveryPrice, Type type, LocalDate expireDate) throws IllegalArgumentException {
+    public Stock(String id, String name, BigDecimal deliveryPrice,BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
         Validator.validateStockId(id);
         this.id = id;
 
@@ -22,7 +23,10 @@ public class Stock {
         Validator.validatePrice(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
 
-        this.type = type;
+        Validator.validatePrice(sellPrice);
+        this.sellPrice = sellPrice;
+
+        this.category = category;
         this.expireDate = expireDate;
     }
 
@@ -52,13 +56,20 @@ public class Stock {
         Validator.validatePrice(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
     }
-
-    public Type getType() {
-        return type;
+    public BigDecimal getSellPrice() {
+        return sellPrice;
     }
 
-    public void setType(Type type) {
-        this.type = type;
+    public void setSellPrice(BigDecimal sellPrice) {
+        Validator.validatePrice(sellPrice);
+        this.sellPrice = sellPrice;
+    }
+    public Category getCategory() {
+        return this.category;
+    }
+
+    public void setCategory(Category category) {
+        this.category = category;
     }
 
     public LocalDate getExpireDate() {
@@ -75,8 +86,9 @@ public class Stock {
                 "id=" + id +
                 ", name='" + name + '\'' +
                 ", deliveryPrice=" + deliveryPrice +
-                ", type=" + type +
+                ", Category=" + category +
                 ", expireDate=" + expireDate +
+                ", sell price=" + sellPrice +
                 '}';
     }
 }

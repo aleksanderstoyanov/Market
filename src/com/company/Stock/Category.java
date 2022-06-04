@@ -1,6 +1,6 @@
 package com.company.Stock;
 
-public enum Type {
+public enum Category {
     Edible,
     NonEdible
 }
