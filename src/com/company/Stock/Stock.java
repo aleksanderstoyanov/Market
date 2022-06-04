@@ -4,13 +4,13 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Stock {
-    int id;
+    String id;
     String name;
     BigDecimal deliveryPrice;
     Type type;
     LocalDate expireDate;
 
-    public Stock(int id, String name, BigDecimal deliveryPrice, Type type, LocalDate expireDate) {
+    public Stock(String id, String name, BigDecimal deliveryPrice, Type type, LocalDate expireDate) {
         this.id = id;
         this.name = name;
         this.deliveryPrice = deliveryPrice;
@@ -18,11 +18,11 @@ public class Stock {
         this.expireDate = expireDate;
     }
 
-    public int getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(String id) {
         this.id = id;
     }
 
