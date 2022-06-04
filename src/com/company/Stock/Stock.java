@@ -1,5 +1,7 @@
 package com.company.Stock;
 
+import com.company.Util.Validator;
+
 import java.math.BigDecimal;
 import java.time.LocalDate;
 
@@ -10,10 +12,16 @@ public class Stock {
     Type type;
     LocalDate expireDate;
 
-    public Stock(String id, String name, BigDecimal deliveryPrice, Type type, LocalDate expireDate) {
+    public Stock(String id, String name, BigDecimal deliveryPrice, Type type, LocalDate expireDate) throws IllegalArgumentException {
+        Validator.validateStockId(id);
         this.id = id;
+
+        Validator.validateStockName(name);
         this.name = name;
+
+        Validator.validatePrice(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
+
         this.type = type;
         this.expireDate = expireDate;
     }
@@ -23,6 +31,7 @@ public class Stock {
     }
 
     public void setId(String id) {
+        Validator.validateStockId(id);
         this.id = id;
     }
 
@@ -31,6 +40,7 @@ public class Stock {
     }
 
     public void setName(String name) {
+        Validator.validateStockName(name);
         this.name = name;
     }
 
@@ -39,6 +49,7 @@ public class Stock {
     }
 
     public void setDeliveryPrice(BigDecimal deliveryPrice) {
+        Validator.validatePrice(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
     }
 

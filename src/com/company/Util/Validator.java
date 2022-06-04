@@ -6,19 +6,19 @@ import java.util.regex.Pattern;
 
 public class Validator {
 
-    static void validatePrice(BigDecimal price) {
+    public static void validatePrice(BigDecimal price) {
         if (price.compareTo(BigDecimal.ONE) < 0) {
             throw new IllegalArgumentException();
         }
     }
 
-    static void validateStockName(String stockName) {
+    public static void validateStockName(String stockName) {
         if (!matchPattern(Expressions.stockNameExpression, stockName)) {
             throw new IllegalArgumentException(String.format(Messages.invalidStockName, stockName));
         }
     }
 
-    static void validateStockId(String stockId) {
+    public static void validateStockId(String stockId) {
         if (!matchPattern(Expressions.stockIdExpression, stockId)) {
             throw new IllegalArgumentException(String.format(Messages.invalidStockId, stockId));
         }
@@ -27,6 +27,7 @@ public class Validator {
     private static boolean matchPattern(String expression, String input) {
         Pattern pattern = Pattern.compile(expression);
         Matcher matcher = pattern.matcher(input);
+
         return matcher.matches();
     }
 }
