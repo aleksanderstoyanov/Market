@@ -1,6 +1,7 @@
 package com.company.Cashing;
 
 import com.company.Contracts.Cashable;
+import com.company.Exceptions.InvalidChangeException;
 import com.company.Stock.Stock;
 import com.company.Util.Expressions;
 import com.company.Util.Messages;
@@ -29,27 +30,28 @@ public class Cashier implements Cashable {
         this.currentPayment = payment;
     }
 
-    private void giveChange(BigDecimal totalPaymentAmount) {
+    private void giveChange(BigDecimal totalPaymentAmount) throws InvalidChangeException {
         if (this.currentPayment.compareTo(totalPaymentAmount) == -1) {
-            System.out.println(Messages.unsuccessfullPayment);
-            //throw exception
+            throw new InvalidChangeException(this.currentPayment);
         } else if (this.currentPayment.compareTo(totalPaymentAmount) == 0) {
-            System.out.println(Messages.successfullPayment + ", you gave me the exact amount");
+            System.out.println(Messages.successfulPayment + ", you gave me the exact amount");
         } else {
             BigDecimal change = this.currentPayment.subtract(totalPaymentAmount);
-            System.out.println(Messages.successfullPayment + ", your change is: " + change);
+            System.out.println(Messages.successfulPayment + ", your change is: " + change);
         }
     }
-    private String getStockInformation(List<Stock> stocks){
+
+    private String getStockInformation(List<Stock> stocks) {
         StringBuffer sb = new StringBuffer();
-        for (Stock stock: stocks) {
+        for (Stock stock : stocks) {
             sb.append(stock.toString());
         }
         return sb.toString().trim();
     }
+
     private void createReceipt(BigDecimal totalPaymentAmount, List<Stock> stocks) {
         String stocksInformation = getStockInformation(stocks);
-        Receipt receipt = new Receipt(1,this.name, LocalDate.now(),stocksInformation,totalPaymentAmount);
+        Receipt receipt = new Receipt(1, this.name, LocalDate.now(), stocksInformation, totalPaymentAmount);
         System.out.println(receipt.toString());
     }
 
@@ -57,6 +59,10 @@ public class Cashier implements Cashable {
     public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) {
         enterPayment(payment);
         createReceipt(totalPaymentAmount, stocks);
-        giveChange(totalPaymentAmount);
+        try {
+            giveChange(totalPaymentAmount);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
     }
 }

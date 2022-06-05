@@ -78,7 +78,7 @@ public class Stock {
     }
 
     public void setSellPrice(BigDecimal sellPrice) {
-        //Validator.isNegativeDecimal(sellPrice);
+        Validator.isNegativeDecimal(sellPrice);
         this.sellPrice = sellPrice;
     }
 
@@ -101,7 +101,7 @@ public class Stock {
     @Override
     public String toString() {
         StringBuffer sb = new StringBuffer();
-        
+
         sb.append(String.format("Stock ID: %s ", this.id));
         sb.append(String.format("Stock Name: %s ", this.name));
         sb.append(String.format("Stock Price: $%s ", this.sellPrice));
