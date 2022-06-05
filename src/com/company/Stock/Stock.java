@@ -1,5 +1,7 @@
 package com.company.Stock;
 
+import com.company.Util.Expressions;
+import com.company.Util.Messages;
 import com.company.Util.Validator;
 
 import java.math.BigDecimal;
@@ -14,16 +16,16 @@ public class Stock {
     LocalDate expireDate;
 
     public Stock(String id, String name, BigDecimal deliveryPrice,BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
-        Validator.validateStockId(id);
+        Validator.validatePattern(id, Expressions.stockIdExpression, Messages.invalidStockId);
         this.id = id;
 
-        Validator.validateStockName(name);
+        Validator.validatePattern(name, Expressions.stockNameExpression, Messages.invalidStockName);
         this.name = name;
 
-        Validator.validatePrice(deliveryPrice);
+        Validator.isNegativeDecimal(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
 
-        Validator.validatePrice(sellPrice);
+        Validator.isNegativeDecimal(sellPrice);
         this.sellPrice = sellPrice;
 
         this.category = category;
@@ -35,7 +37,7 @@ public class Stock {
     }
 
     public void setId(String id) {
-        Validator.validateStockId(id);
+        Validator.validatePattern(id, Expressions.stockIdExpression, Messages.invalidStockId);
         this.id = id;
     }
 
@@ -44,7 +46,7 @@ public class Stock {
     }
 
     public void setName(String name) {
-        Validator.validateStockName(name);
+        Validator.validatePattern(name, Expressions.stockNameExpression, Messages.invalidStockName);
         this.name = name;
     }
 
@@ -53,7 +55,7 @@ public class Stock {
     }
 
     public void setDeliveryPrice(BigDecimal deliveryPrice) {
-        Validator.validatePrice(deliveryPrice);
+        Validator.isNegativeDecimal(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
     }
     public BigDecimal getSellPrice() {
@@ -61,7 +63,7 @@ public class Stock {
     }
 
     public void setSellPrice(BigDecimal sellPrice) {
-        Validator.validatePrice(sellPrice);
+        Validator.isNegativeDecimal(sellPrice);
         this.sellPrice = sellPrice;
     }
     public Category getCategory() {
