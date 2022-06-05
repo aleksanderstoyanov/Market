@@ -12,7 +12,12 @@ public class Validator {
         }
     }
     public static void isNegativeDecimal(BigDecimal input) {
-        if (input.compareTo(BigDecimal.ONE) < 0) {
+        if (input.compareTo(BigDecimal.ONE) < 0.0) {
+            throw new IllegalArgumentException();
+        }
+    }
+    public static void isNegativeInteger(int input){
+        if (input < 0){
             throw new IllegalArgumentException();
         }
     }

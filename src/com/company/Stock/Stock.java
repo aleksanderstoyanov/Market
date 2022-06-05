@@ -11,11 +11,22 @@ public class Stock {
     String id;
     String name;
     BigDecimal deliveryPrice;
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Validator.isNegativeInteger(quantity);
+        this.quantity = quantity;
+    }
+
+    int quantity;
     BigDecimal sellPrice;
     Category category;
     LocalDate expireDate;
 
-    public Stock(String id, String name, BigDecimal deliveryPrice,BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
+    public Stock(String id, String name, BigDecimal deliveryPrice, int quantity, BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
         Validator.validatePattern(id, Expressions.stockIdExpression, Messages.invalidStockId);
         this.id = id;
 
@@ -24,6 +35,9 @@ public class Stock {
 
         Validator.isNegativeDecimal(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
+
+        Validator.isNegativeInteger(quantity);
+        this.quantity = quantity;
 
         Validator.isNegativeDecimal(sellPrice);
         this.sellPrice = sellPrice;
@@ -58,14 +72,16 @@ public class Stock {
         Validator.isNegativeDecimal(deliveryPrice);
         this.deliveryPrice = deliveryPrice;
     }
+
     public BigDecimal getSellPrice() {
         return sellPrice;
     }
 
     public void setSellPrice(BigDecimal sellPrice) {
-        Validator.isNegativeDecimal(sellPrice);
+        //Validator.isNegativeDecimal(sellPrice);
         this.sellPrice = sellPrice;
     }
+
     public Category getCategory() {
         return this.category;
     }
@@ -84,13 +100,13 @@ public class Stock {
 
     @Override
     public String toString() {
-        return "Stock{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                ", deliveryPrice=" + deliveryPrice +
-                ", Category=" + category +
-                ", expireDate=" + expireDate +
-                ", sell price=" + sellPrice +
-                '}';
+        StringBuffer sb = new StringBuffer();
+        
+        sb.append(String.format("Stock ID: %s ", this.id));
+        sb.append(String.format("Stock Name: %s ", this.name));
+        sb.append(String.format("Stock Price: $%s ", this.sellPrice));
+        sb.append(String.format("Quantity: $%s " + this.quantity));
+
+        return sb.toString().trim();
     }
 }
