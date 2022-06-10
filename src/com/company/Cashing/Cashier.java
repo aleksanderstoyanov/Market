@@ -26,6 +26,25 @@ public class Cashier implements Cashable {
         this.salary = salary;
     }
 
+    public BigDecimal getSalary() {
+        return salary;
+    }
+
+    public void setSalary(BigDecimal salary) {
+        this.salary = salary;
+    }
+
+    @Override
+    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) {
+        enterPayment(payment);
+        createReceipt(totalPaymentAmount, stocks);
+        try {
+            giveChange(totalPaymentAmount);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+    }
+
     private void enterPayment(BigDecimal payment) {
         this.currentPayment = payment;
     }
@@ -53,16 +72,5 @@ public class Cashier implements Cashable {
         String stocksInformation = getStockInformation(stocks);
         Receipt receipt = new Receipt(1, this.name, LocalDate.now(), stocksInformation, totalPaymentAmount);
         System.out.println(receipt.toString());
-    }
-
-    @Override
-    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) {
-        enterPayment(payment);
-        createReceipt(totalPaymentAmount, stocks);
-        try {
-            giveChange(totalPaymentAmount);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
     }
 }

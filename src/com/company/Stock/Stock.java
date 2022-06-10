@@ -1,5 +1,6 @@
 package com.company.Stock;
 
+import com.company.Stock.Category;
 import com.company.Util.Expressions;
 import com.company.Util.Messages;
 import com.company.Util.Validator;
@@ -11,16 +12,6 @@ public class Stock {
     String id;
     String name;
     BigDecimal deliveryPrice;
-
-    public int getQuantity() {
-        return quantity;
-    }
-
-    public void setQuantity(int quantity) {
-        Validator.isNegativeInteger(quantity);
-        this.quantity = quantity;
-    }
-
     int quantity;
     BigDecimal sellPrice;
     Category category;
@@ -75,6 +66,15 @@ public class Stock {
 
     public BigDecimal getSellPrice() {
         return sellPrice;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public void setQuantity(int quantity) {
+        Validator.isNegativeInteger(quantity);
+        this.quantity = quantity;
     }
 
     public void setSellPrice(BigDecimal sellPrice) {
