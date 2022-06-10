@@ -26,11 +26,31 @@ public class Cashier implements Cashable {
         this.salary = salary;
     }
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        Validator.validatePattern(id, Expressions.cashierIdExpression, Messages.invalidCashierId);
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        Validator.validatePattern(name, Expressions.cashierNameExpression, Messages.invalidCashierName);
+        this.name = name;
+    }
+
+
     public BigDecimal getSalary() {
         return salary;
     }
 
     public void setSalary(BigDecimal salary) {
+        Validator.isNegativeDecimal(salary);
         this.salary = salary;
     }
 
