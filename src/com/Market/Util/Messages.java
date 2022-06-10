@@ -12,4 +12,6 @@ public class Messages {
 
     public static final String unsuccessfulSell = "Sell cannot be processed stock %s needs %s quantity needed!";
 
+    public static final String unprofitableMessage = "Market is not profitable with a debt of $%s precautions need to be taken !";
+    public static final String profitableMessage = "Market is profitable with a total profit $%s time for celebration !";
 }

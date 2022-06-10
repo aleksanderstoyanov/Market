@@ -4,7 +4,9 @@ import com.Market.Cashing.CashRegister;
 import com.Market.Cashing.Cashier;
 import com.Market.Contracts.Marketable;
 import com.Market.Stock.Stock;
+import com.Market.Util.Messages;
 import com.Market.Util.Validator;
+import org.w3c.dom.ls.LSOutput;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
@@ -24,7 +26,6 @@ public class Market implements Marketable {
     int totalReceiptsCount;
 
     //Constructors
-
     public Market() {
         this.deliveredStocks = new ArrayList<Stock>();
         this.soldStocks = new ArrayList<Stock>();
@@ -60,6 +61,14 @@ public class Market implements Marketable {
 
     public int getDecreasePercentage() {
         return decreasePercentage;
+    }
+
+    public List<Cashier> getCashiers() {
+        return cashiers;
+    }
+
+    public List<CashRegister> getCashRegisters() {
+        return cashRegisters;
     }
 
     public void setDecreasePercentage(int decreasePercentage) {
@@ -117,8 +126,14 @@ public class Market implements Marketable {
     public void getSummary() {
         BigDecimal totalCosts = this.getSalariesCost().add(this.getDeliveryStocksCost());
         BigDecimal totalProfit = this.getSoldStocksProfit();
-        System.out.println("" +
-                " " + totalProfit.subtract(totalCosts));
+
+        BigDecimal totalSum = totalProfit.subtract(totalCosts);
+        if (totalSum.compareTo(BigDecimal.ZERO) == -1) {
+            System.out.println(String.format(Messages.unprofitableMessage, totalSum));
+        }
+        else{
+            System.out.println(String.format(Messages.profitableMessage, totalSum));
+        }
     }
 
     @Override
@@ -140,6 +155,7 @@ public class Market implements Marketable {
     @Override
     public void addCashRegister(Cashier cashier) {
         CashRegister cashRegister = new CashRegister(this.deliveredStocks, this.soldStocks, cashier);
+        this.cashRegisters.add(cashRegister);
     }
 
     private boolean isExpired(int days) {
@@ -149,7 +165,7 @@ public class Market implements Marketable {
     private BigDecimal getSalariesCost() {
         BigDecimal totalCosts = BigDecimal.ZERO;
         for (Cashier cashier : this.cashiers) {
-            totalCosts.add(cashier.getSalary());
+            totalCosts = totalCosts.add(cashier.getSalary());
         }
         return totalCosts;
     }
@@ -157,7 +173,7 @@ public class Market implements Marketable {
     private BigDecimal getDeliveryStocksCost() {
         BigDecimal totalCosts = BigDecimal.ZERO;
         for (Stock stock : this.deliveredStocks) {
-            totalCosts.add(stock.getDeliveryPrice().multiply(BigDecimal.valueOf(stock.getQuantity())));
+            totalCosts = totalCosts.add(stock.getDeliveryPrice().multiply(BigDecimal.valueOf(stock.getQuantity())));
         }
         return totalCosts;
     }
