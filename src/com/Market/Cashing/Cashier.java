@@ -26,6 +26,10 @@ public class Cashier implements Cashable {
         this.salary = salary;
     }
 
+    public BigDecimal getCurrentPayment() {
+        return currentPayment;
+    }
+
     public String getId() {
         return id;
     }
@@ -55,14 +59,10 @@ public class Cashier implements Cashable {
     }
 
     @Override
-    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) {
+    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) throws InvalidChangeException {
         enterPayment(payment);
         createReceipt(totalPaymentAmount, stocks);
-        try {
-            giveChange(totalPaymentAmount);
-        } catch (Exception e) {
-            System.out.println(e);
-        }
+        giveChange(totalPaymentAmount);
     }
 
     private void enterPayment(BigDecimal payment) {
@@ -83,14 +83,16 @@ public class Cashier implements Cashable {
     private String getStockInformation(List<Stock> stocks) {
         StringBuffer sb = new StringBuffer();
         for (Stock stock : stocks) {
-            sb.append(stock.toString());
+            sb.append(stock.toString()+"\n");
         }
         return sb.toString().trim();
     }
 
     private void createReceipt(BigDecimal totalPaymentAmount, List<Stock> stocks) {
         String stocksInformation = getStockInformation(stocks);
-        Receipt receipt = new Receipt(1, this.name, LocalDate.now(), stocksInformation, totalPaymentAmount);
+        Receipt receipt = new Receipt(this.name, LocalDate.now(), stocksInformation, totalPaymentAmount);
+
+        receipt.writeFile();
         System.out.println(receipt.toString());
     }
 }

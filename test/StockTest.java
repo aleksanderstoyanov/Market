@@ -1,6 +1,8 @@
+import com.Market.Cashing.Cashier;
 import com.Market.Stock.Category;
 import com.Market.Stock.Stock;
 import org.junit.Assert;
+import org.junit.Before;
 import org.junit.Test;
 
 import java.math.BigDecimal;
@@ -9,7 +11,12 @@ import java.time.LocalDate;
 import static org.junit.Assert.*;
 
 public class StockTest {
-    static Stock stock = new Stock("1233-312-3123", "Banana", BigDecimal.valueOf(1.25), 2, BigDecimal.valueOf(2.25), Category.Edible, LocalDate.now());
+    private Stock stock;
+
+    @Before
+    public void init() {
+        stock = new Stock("1233-312-3123", "Banana", BigDecimal.valueOf(1.25), 2, BigDecimal.valueOf(2.25), Category.Edible, LocalDate.now());
+    }
 
     @Test
     public void constructorShouldReturnValidObject() {
@@ -24,7 +31,7 @@ public class StockTest {
     }
 
     @Test
-    public void settersShouldChangeObjectSuccessfully() {
+    public void settersShouldManipulateObjectSuccessfully() {
         stock.setId("1234-321-4444");
         assertEquals("1234-321-4444", stock.getId());
 
@@ -48,15 +55,15 @@ public class StockTest {
     }
 
     @Test
-    public void toStringShouldReturnValidString(){
+    public void toStringShouldReturnValidString() {
         StringBuffer sb = new StringBuffer();
 
         sb.append(String.format("Stock ID: %s ", stock.getId()));
         sb.append(String.format("Stock Name: %s ", stock.getName()));
         sb.append(String.format("Stock Price: $%s ", stock.getSellPrice()));
-        sb.append(String.format("Quantity: $%s " , stock.getQuantity()));
+        sb.append(String.format("Quantity: $%s ", stock.getQuantity()));
 
-        assertEquals(sb.toString().trim(),stock.toString());
+        assertEquals(sb.toString().trim(), stock.toString());
     }
 
     @Test

@@ -1,5 +1,6 @@
 package com.Market.Cashing;
 
+import com.Market.Exceptions.InvalidChangeException;
 import com.Market.Exceptions.InvalidSellException;
 import com.Market.Stock.Stock;
 
@@ -29,7 +30,7 @@ public class CashRegister {
         this.receiptsCount = receiptsCount;
     }
 
-    public void sellStock(BigDecimal payment, List<Stock> stocks) throws InvalidSellException {
+    public void sellStock(BigDecimal payment, List<Stock> stocks) throws InvalidSellException, InvalidChangeException {
         areAvailable(stocks);
         BigDecimal totalPaymentAmount = this.getTotalPaymentAmount(stocks);
 

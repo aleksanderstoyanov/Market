@@ -2,21 +2,21 @@ package com.Market.Cashing;
 
 import com.Market.Contracts.Fileable;
 
+import java.io.File;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.util.UUID;
 
 public class Receipt implements Fileable {
-    int receiptNo;
     String cashierName;
     LocalDate createdOn;
     String stockInformation;
     BigDecimal totalPrice;
 
-    public Receipt(int receiptNo, String cashierName, LocalDate createdOn, String stockInformation, BigDecimal totalPrice) {
-        this.receiptNo = receiptNo;
+    public Receipt(String cashierName, LocalDate createdOn, String stockInformation, BigDecimal totalPrice) {
         this.cashierName = cashierName;
         this.createdOn = createdOn;
         this.stockInformation = stockInformation;
@@ -36,12 +36,31 @@ public class Receipt implements Fileable {
     }
 
     @Override
-    public void writeFile(int id) {
-        String path = String.format("receipt no_%s", id);
-        try (FileWriter fileWriter = new FileWriter("path")) {
+    public void writeFile() {
+        String fileName = String.format("receipt no_%s", UUID.randomUUID());
+        String receiptsFolder = new File(".").getAbsolutePath() + "//receipts//";
+        try (FileWriter fileWriter = new FileWriter(receiptsFolder + fileName + ".txt", true)) {
             fileWriter.write(this.toString());
         } catch (IOException ex) {
             System.out.println(ex.getMessage());
         }
+    }
+
+
+    @Override
+    public String toString() {
+        StringBuffer sb = new StringBuffer();
+        sb.append(String.format("[Cashier_%s]\n", this.cashierName));
+        sb.append("-------------------" + '\n');
+        sb.append(String.format("[Stocks]") + '\n');
+        sb.append("-------------------" + '\n');
+        sb.append(this.stockInformation + '\n');
+        sb.append(String.format("-------------------") + '\n');
+        sb.append(String.format("[Total Price]") + '\n');
+        sb.append("-------------------" + '\n');
+        sb.append(String.format("$%s", this.totalPrice) + '\n');
+        sb.append("-------------------" + '\n');
+        sb.append(String.format("Date created: %s ", this.createdOn) + '\n');
+        return sb.toString().trim();
     }
 }

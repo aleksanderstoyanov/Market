@@ -104,7 +104,7 @@ public class Stock {
         sb.append(String.format("Stock ID: %s ", this.id));
         sb.append(String.format("Stock Name: %s ", this.name));
         sb.append(String.format("Stock Price: $%s ", this.sellPrice));
-        sb.append(String.format("Quantity: $%s " , this.quantity));
+        sb.append(String.format("Quantity: %s " , this.quantity));
 
         return sb.toString().trim();
     }
