@@ -11,10 +11,13 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class Receipt implements Fileable {
+    //Fields
     String cashierName;
     LocalDate createdOn;
     String stockInformation;
     BigDecimal totalPrice;
+
+    //Constructors
 
     public Receipt(String cashierName, LocalDate createdOn, String stockInformation, BigDecimal totalPrice) {
         this.cashierName = cashierName;
@@ -22,6 +25,8 @@ public class Receipt implements Fileable {
         this.stockInformation = stockInformation;
         this.totalPrice = totalPrice;
     }
+
+    //Business logic
 
     @Override
     public void readFile(String path) {

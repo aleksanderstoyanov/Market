@@ -8,6 +8,8 @@ import java.math.BigDecimal;
 import java.time.LocalDate;
 
 public class Stock {
+    //Fields
+
     String id;
     String name;
     BigDecimal deliveryPrice;
@@ -15,6 +17,8 @@ public class Stock {
     BigDecimal sellPrice;
     Category category;
     LocalDate expireDate;
+
+    //Constructors
 
     public Stock(String id, String name, BigDecimal deliveryPrice, int quantity, BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
         Validator.validatePattern(id, Expressions.stockIdExpression, Messages.invalidStockId);
@@ -35,6 +39,8 @@ public class Stock {
         this.category = category;
         this.expireDate = expireDate;
     }
+
+    //Getters and Setters
 
     public String getId() {
         return id;

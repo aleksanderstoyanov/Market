@@ -19,7 +19,7 @@ public class StockTest {
     }
 
     @Test
-    public void constructorShouldReturnValidObject() {
+    public void constructorShouldInstantiateValidObject() {
 
         assertEquals("1233-312-3123", stock.getId());
         assertEquals("Banana", stock.getName());

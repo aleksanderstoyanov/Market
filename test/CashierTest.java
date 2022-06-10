@@ -1,6 +1,5 @@
 import com.Market.Cashing.Cashier;
 import com.Market.Exceptions.InvalidChangeException;
-import com.Market.Exceptions.InvalidSellException;
 import com.Market.Stock.Category;
 import com.Market.Stock.Stock;
 import org.junit.Before;
@@ -28,7 +27,7 @@ public class CashierTest {
     }
 
     @Test
-    public void constructorShouldReturnValidObject() {
+    public void constructorShouldInstantiateValidObject() {
         assertEquals("12_1234", cashier.getId());
         assertEquals("John Johnson", cashier.getName());
         assertEquals(BigDecimal.valueOf(1421.512), cashier.getSalary());

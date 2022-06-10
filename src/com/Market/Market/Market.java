@@ -4,12 +4,15 @@ import com.Market.Cashing.CashRegister;
 import com.Market.Cashing.Cashier;
 import com.Market.Contracts.Marketable;
 import com.Market.Stock.Stock;
+import com.Market.Util.Validator;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;
 import java.util.List;
 
 public class Market implements Marketable {
+    //Fields
+
     private List<Stock> deliveredStocks;
     private List<Stock> soldStocks;
     private List<CashRegister> cashRegisters;
@@ -20,6 +23,8 @@ public class Market implements Marketable {
     int daysToExpire;
     int totalReceiptsCount;
 
+    //Constructors
+
     public Market() {
         this.deliveredStocks = new ArrayList<Stock>();
         this.soldStocks = new ArrayList<Stock>();
@@ -28,8 +33,13 @@ public class Market implements Marketable {
     }
 
     public Market(int markupPercentage, int decreasePercentage, int daysToExpire) {
+        Validator.isNegativeInteger(markupPercentage);
         this.markupPercentage = markupPercentage;
+
+        Validator.isNegativeInteger(decreasePercentage);
         this.decreasePercentage = decreasePercentage;
+
+        Validator.isNegativeInteger(daysToExpire);
         this.daysToExpire = daysToExpire;
 
         this.deliveredStocks = new ArrayList<Stock>();
@@ -37,6 +47,56 @@ public class Market implements Marketable {
         this.cashRegisters = new ArrayList<CashRegister>();
         this.cashiers = new ArrayList<Cashier>();
     }
+    //Getters and Setters
+
+    public int getMarkupPercentage() {
+        return markupPercentage;
+    }
+
+    public void setMarkupPercentage(int markupPercentage) {
+        Validator.isNegativeInteger(markupPercentage);
+        this.markupPercentage = markupPercentage;
+    }
+
+    public int getDecreasePercentage() {
+        return decreasePercentage;
+    }
+
+    public void setDecreasePercentage(int decreasePercentage) {
+        Validator.isNegativeInteger(decreasePercentage);
+        this.decreasePercentage = decreasePercentage;
+    }
+
+    public int getDaysToExpire() {
+        return daysToExpire;
+    }
+
+    public int getCashiersCount() {
+        return this.cashiers.size();
+    }
+
+    public int getDeliveredStocksCount() {
+        return this.deliveredStocks.size();
+    }
+
+    public int getSoldStocksCount() {
+        return this.soldStocks.size();
+    }
+
+    public void setDaysToExpire(int daysToExpire) {
+        Validator.isNegativeInteger(daysToExpire);
+        this.daysToExpire = daysToExpire;
+    }
+
+    public int getTotalReceiptsCount() {
+        return totalReceiptsCount;
+    }
+
+    public void setTotalReceiptsCount(int totalReceiptsCount) {
+        this.totalReceiptsCount = totalReceiptsCount;
+    }
+
+    //Business Logic
 
     @Override
     public void hireCashier(Cashier cashier) {
@@ -48,8 +108,8 @@ public class Market implements Marketable {
         int daysLeft = stock.getExpireDate().getDayOfMonth();
 
         if (!isExpired(daysLeft)) {
-            evaluateStockPrice(stock);
             this.deliveredStocks.add(stock);
+            evaluateStockPrice(stock);
         }
     }
 
@@ -57,7 +117,8 @@ public class Market implements Marketable {
     public void getSummary() {
         BigDecimal totalCosts = this.getSalariesCost().add(this.getDeliveryStocksCost());
         BigDecimal totalProfit = this.getSoldStocksProfit();
-        System.out.println("Total Profit of the Market is: " + totalProfit.subtract(totalCosts));
+        System.out.println("" +
+                " " + totalProfit.subtract(totalCosts));
     }
 
     @Override
@@ -82,7 +143,7 @@ public class Market implements Marketable {
     }
 
     private boolean isExpired(int days) {
-        return days - this.daysToExpire > 0 ? true : false;
+        return days - this.daysToExpire > 0 ? false : true;
     }
 
     private BigDecimal getSalariesCost() {

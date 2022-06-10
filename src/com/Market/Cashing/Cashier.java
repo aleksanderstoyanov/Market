@@ -12,10 +12,13 @@ import java.time.LocalDate;
 import java.util.List;
 
 public class Cashier implements Cashable {
+    //Fields
     String id;
     String name;
     BigDecimal salary;
     BigDecimal currentPayment;
+
+    //Constructors
 
     public Cashier(String id, String name, BigDecimal salary) {
         Validator.validatePattern(id, Expressions.cashierIdExpression, Messages.invalidCashierId);
@@ -25,6 +28,8 @@ public class Cashier implements Cashable {
         Validator.isNegativeDecimal(salary);
         this.salary = salary;
     }
+
+    //Getters and setters
 
     public BigDecimal getCurrentPayment() {
         return currentPayment;
@@ -58,11 +63,13 @@ public class Cashier implements Cashable {
         this.salary = salary;
     }
 
+    //Business logic
+
     @Override
     public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) throws InvalidChangeException {
         enterPayment(payment);
-        createReceipt(totalPaymentAmount, stocks);
         giveChange(totalPaymentAmount);
+        createReceipt(totalPaymentAmount, stocks);
     }
 
     private void enterPayment(BigDecimal payment) {
@@ -83,7 +90,7 @@ public class Cashier implements Cashable {
     private String getStockInformation(List<Stock> stocks) {
         StringBuffer sb = new StringBuffer();
         for (Stock stock : stocks) {
-            sb.append(stock.toString()+"\n");
+            sb.append(stock.toString() + "\n");
         }
         return sb.toString().trim();
     }
