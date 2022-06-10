@@ -1,11 +1,11 @@
-package com.company.Cashing;
+package com.Market.Cashing;
 
-import com.company.Contracts.Cashable;
-import com.company.Exceptions.InvalidChangeException;
-import com.company.Stock.Stock;
-import com.company.Util.Expressions;
-import com.company.Util.Messages;
-import com.company.Util.Validator;
+import com.Market.Contracts.Cashable;
+import com.Market.Exceptions.InvalidChangeException;
+import com.Market.Stock.Stock;
+import com.Market.Util.Expressions;
+import com.Market.Util.Messages;
+import com.Market.Util.Validator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;

@@ -1,4 +1,4 @@
-package com.company.Util;
+package com.Market.Util;
 
 public class Expressions {
     public static final String stockNameExpression = "^[A-Za-z ]*$";

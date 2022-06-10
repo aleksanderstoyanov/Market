@@ -1,4 +1,4 @@
-package com.company.Stock;
+package com.Market.Stock;
 
 public enum Category {
     Edible,

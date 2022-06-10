@@ -1,9 +1,8 @@
-package com.company.Stock;
+package com.Market.Stock;
 
-import com.company.Stock.Category;
-import com.company.Util.Expressions;
-import com.company.Util.Messages;
-import com.company.Util.Validator;
+import com.Market.Util.Expressions;
+import com.Market.Util.Messages;
+import com.Market.Util.Validator;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
@@ -105,7 +104,7 @@ public class Stock {
         sb.append(String.format("Stock ID: %s ", this.id));
         sb.append(String.format("Stock Name: %s ", this.name));
         sb.append(String.format("Stock Price: $%s ", this.sellPrice));
-        sb.append(String.format("Quantity: $%s " + this.quantity));
+        sb.append(String.format("Quantity: $%s " , this.quantity));
 
         return sb.toString().trim();
     }

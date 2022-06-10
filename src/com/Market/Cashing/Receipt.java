@@ -1,8 +1,7 @@
-package com.company.Cashing;
+package com.Market.Cashing;
 
-import com.company.Contracts.Fileable;
+import com.Market.Contracts.Fileable;
 
-import java.io.FileOutputStream;
 import java.io.FileReader;
 import java.io.FileWriter;
 import java.io.IOException;

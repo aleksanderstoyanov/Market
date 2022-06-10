@@ -1,7 +1,7 @@
-package com.company.Contracts;
+package com.Market.Contracts;
 
-import com.company.Cashing.Cashier;
-import com.company.Stock.Stock;
+import com.Market.Cashing.Cashier;
+import com.Market.Stock.Stock;
 
 public interface Marketable {
     void hireCashier(Cashier cashier);

@@ -1,9 +1,9 @@
-package com.company.Market;
+package com.Market.Market;
 
-import com.company.Cashing.CashRegister;
-import com.company.Cashing.Cashier;
-import com.company.Contracts.Marketable;
-import com.company.Stock.Stock;
+import com.Market.Cashing.CashRegister;
+import com.Market.Cashing.Cashier;
+import com.Market.Contracts.Marketable;
+import com.Market.Stock.Stock;
 
 import java.math.BigDecimal;
 import java.util.ArrayList;

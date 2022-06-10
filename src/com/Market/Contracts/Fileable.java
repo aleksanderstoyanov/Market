@@ -1,4 +1,4 @@
-package com.company.Contracts;
+package com.Market.Contracts;
 
 public interface Fileable {
     public void readFile(String path);

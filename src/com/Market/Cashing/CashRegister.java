@@ -1,7 +1,7 @@
-package com.company.Cashing;
+package com.Market.Cashing;
 
-import com.company.Exceptions.InvalidSellException;
-import com.company.Stock.Stock;
+import com.Market.Exceptions.InvalidSellException;
+import com.Market.Stock.Stock;
 
 import java.math.BigDecimal;
 import java.util.List;

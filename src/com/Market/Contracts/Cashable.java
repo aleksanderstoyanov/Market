@@ -1,6 +1,6 @@
-package com.company.Contracts;
+package com.Market.Contracts;
 
-import com.company.Stock.Stock;
+import com.Market.Stock.Stock;
 
 import java.math.BigDecimal;
 import java.util.List;

@@ -1,4 +1,4 @@
-package com.company.Util;
+package com.Market.Util;
 
 public class Messages {
     public static final String invalidStockId = "Current input: %s is not a valid stock id! The pattern should be [XXXX-XXX-XXXX]";

@@ -1,6 +1,6 @@
-package com.company.Exceptions;
+package com.Market.Exceptions;
 
-import com.company.Util.Messages;
+import com.Market.Util.Messages;
 
 public class InvalidSellException extends Exception {
     String stockName;

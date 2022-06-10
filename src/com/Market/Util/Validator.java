@@ -1,4 +1,4 @@
-package com.company.Util;
+package com.Market.Util;
 
 import java.math.BigDecimal;
 import java.util.regex.Matcher;
@@ -12,7 +12,7 @@ public class Validator {
         }
     }
     public static void isNegativeDecimal(BigDecimal input) {
-        if (input.compareTo(BigDecimal.ONE) < 0.0) {
+        if (input.compareTo(BigDecimal.ZERO) < 0.0) {
             throw new IllegalArgumentException();
         }
     }

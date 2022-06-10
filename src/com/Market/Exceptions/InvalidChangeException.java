@@ -1,6 +1,6 @@
-package com.company.Exceptions;
+package com.Market.Exceptions;
 
-import com.company.Util.Messages;
+import com.Market.Util.Messages;
 
 import java.math.BigDecimal;
 
