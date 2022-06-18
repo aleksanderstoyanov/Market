@@ -14,4 +14,7 @@ public class Messages {
 
     public static final String unprofitableMessage = "Market is not profitable with a debt of $%s precautions need to be taken !";
     public static final String profitableMessage = "Market is profitable with a total profit $%s time for celebration !";
+
+    public static final String deliveredProductMessage = "Product %s with quantity %s has been delivered !";
+    public static final String hiredCashierMessage = "Cashier %s with salary %s has been hired !";
 }

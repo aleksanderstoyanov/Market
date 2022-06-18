@@ -62,6 +62,7 @@ public class CashRegister {
 
         this.cashier.processPayment(payment, totalPaymentAmount, stocks);
         this.totalProfit = this.totalProfit.add(totalPaymentAmount);
+
         decreaseStocks(stocks);
         this.receiptsCount += 1;
     }
