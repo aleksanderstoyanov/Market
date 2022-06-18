@@ -6,6 +6,7 @@ import com.Market.Stock.Stock;
 import com.Market.Util.Messages;
 import com.Market.Util.Repository;
 
+import java.util.Locale;
 import java.util.Scanner;
 
 public class MarketEngine extends Engine {
@@ -20,12 +21,11 @@ public class MarketEngine extends Engine {
         do {
             System.out.println("Would you like to start the application ? Y/N");
             answer = scanner.nextLine();
-        } while (!answer.equals("Y") && !answer.equals("N"));
+        } while (!answer.toUpperCase(Locale.ROOT).equals("Y") && !answer.toUpperCase(Locale.ROOT).equals("N"));
 
-        if (answer.equals("Y")) {
+        if (answer.toUpperCase(Locale.ROOT).equals("Y")) {
             start();
-        }
-        else{
+        } else {
             System.out.println("Goodbye !");
         }
     }
@@ -39,6 +39,10 @@ public class MarketEngine extends Engine {
 
             MarketLoader.loadingHiredCashiers();
             hireEmployees(market);
+
+            MarketLoader.loadingCashRegisters();
+            addCashRegisters(market);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
         }
@@ -59,4 +63,13 @@ public class MarketEngine extends Engine {
             System.out.println(String.format(Messages.hiredCashierMessage, cashier.getName(), cashier.getSalary()));
         }
     }
+
+    private static void addCashRegisters(Market market) throws InterruptedException {
+        for (Cashier cashier : market.getCashiers()) {
+            market.addCashRegister(cashier);
+            Thread.sleep(1000);
+            System.out.println(String.format(Messages.createdCashRegister,cashier.getName()));
+        }
+    }
+
 }

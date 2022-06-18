@@ -11,6 +11,11 @@ public class MarketLoader {
         System.out.print("Hiring cashiers");
         loadAnimation();
     }
+    public static void loadingCashRegisters() throws InterruptedException{
+        System.out.print("Adding cash registers");
+        loadAnimation();
+
+    }
 
     private static void loadAnimation() throws InterruptedException {
         for (int i = 0; i < 3; i++) {
