@@ -2,19 +2,9 @@ package com.Market.Util.Engine;
 
 public class MarketLoader {
 
-    public static void loadingDeliveredProducts() throws InterruptedException {
-        System.out.print("Delivering products");
+    public static void writeMessage(String message) throws InterruptedException{
+        System.out.print(message);
         loadAnimation();
-    }
-
-    public static void loadingHiredCashiers() throws InterruptedException {
-        System.out.print("Hiring cashiers");
-        loadAnimation();
-    }
-    public static void loadingCashRegisters() throws InterruptedException{
-        System.out.print("Adding cash registers");
-        loadAnimation();
-
     }
 
     private static void loadAnimation() throws InterruptedException {

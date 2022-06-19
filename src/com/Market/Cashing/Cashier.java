@@ -66,10 +66,15 @@ public class Cashier implements Cashable {
     //Business logic
 
     @Override
-    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) throws InvalidChangeException {
-        enterPayment(payment);
-        giveChange(totalPaymentAmount);
-        createReceipt(totalPaymentAmount, stocks);
+    public void processPayment(BigDecimal payment, BigDecimal totalPaymentAmount, List<Stock> stocks) {
+        try{
+            enterPayment(payment);
+            giveChange(totalPaymentAmount);
+            createReceipt(totalPaymentAmount, stocks);
+        }
+        catch (InvalidChangeException ex){
+            System.out.println(ex);
+        }
     }
 
     private void enterPayment(BigDecimal payment) {

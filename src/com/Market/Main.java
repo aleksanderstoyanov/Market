@@ -18,5 +18,4 @@ public class Main {
         MarketEngine engine = new MarketEngine();
         engine.run();
     }
-
 }

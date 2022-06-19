@@ -6,6 +6,7 @@ import com.Market.Stock.Stock;
 import com.Market.Util.Validator;
 
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.List;
 
 public class CashRegister {
@@ -56,15 +57,21 @@ public class CashRegister {
 
     //Business logic
 
-    public void sellStock(BigDecimal payment, List<Stock> stocks) throws InvalidSellException, InvalidChangeException {
-        areAvailable(stocks);
-        BigDecimal totalPaymentAmount = this.getTotalPaymentAmount(stocks);
+    public void sellStock(BigDecimal payment, List<Stock> stocks) {
+        try {
+            areAvailable(stocks);
+            List<Stock> availableStocks = getAvailableStocks(stocks);
 
-        this.cashier.processPayment(payment, totalPaymentAmount, stocks);
-        this.totalProfit = this.totalProfit.add(totalPaymentAmount);
+            BigDecimal totalPaymentAmount = this.getTotalPaymentAmount(availableStocks);
 
-        decreaseStocks(stocks);
-        this.receiptsCount += 1;
+            this.cashier.processPayment(payment, totalPaymentAmount, availableStocks);
+            this.totalProfit = this.totalProfit.add(totalPaymentAmount);
+
+            decreaseStocks(availableStocks);
+            this.receiptsCount += 1;
+        } catch (Exception ex) {
+            System.out.println(ex);
+        }
     }
 
     private void decreaseStocks(List<Stock> stocks) {
@@ -97,11 +104,22 @@ public class CashRegister {
         }
     }
 
+    private List<Stock> getAvailableStocks(List<Stock> stocks) {
+        List<Stock> availableStocks = new ArrayList<>();
+        for (Stock stock : stocks) {
+            Stock currentStock = new Stock(findStockByName(stock.getName()));
+            currentStock.setQuantity(stock.getQuantity());
+            availableStocks.add(currentStock);
+        }
+        return availableStocks;
+    }
+
     private BigDecimal getTotalPaymentAmount(List<Stock> stocks) {
         BigDecimal totalPrice = BigDecimal.ZERO;
 
         for (Stock stock : stocks) {
-            BigDecimal currentPrice = stock.getSellPrice().multiply(BigDecimal.valueOf(stock.getQuantity()));
+            Stock currentStock = findStockByName(stock.getName());
+            BigDecimal currentPrice = currentStock.getSellPrice().multiply(BigDecimal.valueOf(stock.getQuantity()));
             totalPrice = totalPrice.add(currentPrice);
         }
         return totalPrice;

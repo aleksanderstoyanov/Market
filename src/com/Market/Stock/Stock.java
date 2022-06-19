@@ -20,6 +20,26 @@ public class Stock {
 
     //Constructors
 
+    public Stock(Stock stock) {
+        Validator.validatePattern(stock.id, Expressions.stockIdExpression, Messages.invalidStockId);
+        this.id = stock.getId();
+
+        Validator.validatePattern(stock.name, Expressions.stockNameExpression, Messages.invalidStockName);
+        this.name = stock.name;
+
+        Validator.isNegativeDecimal(stock.deliveryPrice);
+        this.deliveryPrice = stock.deliveryPrice;
+
+        Validator.isNegativeInteger(stock.quantity);
+        this.quantity = stock.quantity;
+
+        Validator.isNegativeDecimal(stock.sellPrice);
+        this.sellPrice = stock.sellPrice;
+
+        this.expireDate = stock.expireDate;
+        this.category = stock.category;
+    }
+
     public Stock(String id, String name, BigDecimal deliveryPrice, int quantity, BigDecimal sellPrice, Category category, LocalDate expireDate) throws IllegalArgumentException {
         Validator.validatePattern(id, Expressions.stockIdExpression, Messages.invalidStockId);
         this.id = id;
@@ -110,7 +130,7 @@ public class Stock {
         sb.append(String.format("Stock ID: %s ", this.id));
         sb.append(String.format("Stock Name: %s ", this.name));
         sb.append(String.format("Stock Price: $%s ", this.sellPrice));
-        sb.append(String.format("Quantity: %s " , this.quantity));
+        sb.append(String.format("Quantity: %s ", this.quantity));
 
         return sb.toString().trim();
     }
